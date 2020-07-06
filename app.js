@@ -4,15 +4,16 @@ var cors = require('cors')
 const GoogleNewsRss = require('google-news-rss');
 
 var app = express();
-var corsOptions = {
-    origin: 'http://localhost:4200/',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+app.use(allowCrossDomain)
+// var corsOptions = {
+//     origin: 'http://localhost:4200/',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
 app.set('port', (process.env.PORT || 8080))
 //var server = http.createServer(app);
 const googleNews = new GoogleNewsRss();
 
-app.get('/news/:id', cors(corsOptions),function (req, res, next) {
+app.get('/news/:id', function (req, res, next) {
 	var id = req.params.id;
     googleNews
    .search(id)
