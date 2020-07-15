@@ -2,7 +2,7 @@ var express = require('express');
 var http = require('http');
 var cors = require('cors')
 const GoogleNewsRss = require('google-news-rss');
-let grabity = require("grabity");
+
 var app = express();
 // Add headers
 // var corsOptions = {
@@ -12,7 +12,7 @@ var app = express();
 app.set('port', (process.env.PORT || 8080))
 //var server = http.createServer(app);
 const googleNews = new GoogleNewsRss();
-let returnArray = [];
+
 app.get('/news/:id', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
@@ -21,13 +21,7 @@ app.get('/news/:id', function (req, res, next) {
 	var id = req.params.id;
     googleNews
    .search(id)
-   .then(resp => {
-       for (let x=0;x<resp.length;x++){
-        let it = await grabity.grabIt(resp[x].link);
-        returnArray.push(it); 
-       }
-        res.json(returnArray);
-   });
+   .then(resp => res.json(resp));
 });
 app.get('/test', (req, res) => res.send('Hello World!'))
 var server = app.listen(app.get('port'))
