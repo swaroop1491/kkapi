@@ -22,11 +22,11 @@ app.get('/news/:id', function (req, res, next) {
     googleNews
    .search(id)
    .then(resp => {
-       for (let x in resp){
-        let it = await grabity.grabIt(resp[x].link);
-        returnArray.push(it); 
-       }
-        res.json(returnArray);
+    //    for (let x in resp){
+    //     let it = await grabity.grabIt(resp[x].link);
+    //     returnArray.push(it); 
+    //    }
+        res.json(resp.link);
    });
 });
 app.get('/test', (req, res) => res.send('Hello World!'))
