@@ -21,7 +21,9 @@ app.get('/news/:id', function (req, res, next) {
 	var id = req.params.id;
     googleNews
    .search(id)
-   .then(resp => res.json(resp));
+   .then(resp => {
+        res.json(resp);
+   });
 });
 app.get('/test', (req, res) => res.send('Hello World!'))
 var server = app.listen(app.get('port'))
