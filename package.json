@@ -8,8 +8,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "google-news-rss": "^0.4.1",
+    "google-news-scraper": "^1.0.4",
+    "google-trends-api": "^4.9.0",
     "grabity": "^1.0.5",
-    "http": "0.0.1-security"
+    "http": "0.0.1-security",
+    "url-metadata": "^2.4.1"
   },
   "engines": {
     "node": ">=0.10.0"
