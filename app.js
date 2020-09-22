@@ -5,7 +5,6 @@ const urlMetadata = require('url-metadata')
 const googleTrends = require('google-trends-api');
 const GoogleNewsRss = require('google-news-rss');
 const googleNewsScraper = require('google-news-scraper');
-const urlMetadata = require('url-metadata');
 var previewData = [];
 var app = express();
 // Add headers
@@ -25,23 +24,8 @@ app.get('/news/:id', function (req, res, next) {
 	var id = req.params.id;
     googleNews
    .search(id)
-   .then(function(resp) {
-     for(let i=0;i<resp.length;i++){
-       let z = preview(resp[i].link);
-      previewData.push(z);
-     }
-     res.send(previewData);
-   } );
+   .then(resp => res.send(resp) );
 });
-async preview => (url){
-  await urlMetadata(resp[i].link).then(
-      function (metadata) { // success handler
-        return metadata;
-      },
-      function (error) { // failure handler
-        console.log(error)
-      })
-};
 app.get('/trends/:id', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
@@ -63,14 +47,14 @@ app.get('/preview/:id', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true); // If needed
     res.setHeader('Content-Type', 'application/json');
 	var id = req.params.id;
-   res.send('Hello World!')
-// urlMetadata(id).then(
-//   function (metadata) { // success handler
-//     res.send(metadata);
-//   },
-//   function (error) { // failure handler
-//     console.log(error)
-//   })
+  console.log(id)
+urlMetadata(id).then(
+  function (metadata) { // success handler
+    res.send(metadata);
+  },
+  function (error) { // failure handler
+    console.log(error)
+  })
 });
 app.get('/test', (req, res) => res.send('Hello World!'))
 var server = app.listen(app.get('port'))
