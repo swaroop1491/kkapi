@@ -12,7 +12,7 @@ var app = express();
 //     origin: 'http://localhost:4200/',
 //     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 //   }
-app.set('port', (process.env.PORT || 8080))
+//app.set('port', (process.env.PORT || 8080))
 //var server = http.createServer(app);
 const googleNews = new GoogleNewsRss();
 app.get('/preview', function (req, res, next) {
@@ -52,5 +52,8 @@ app.get('/trends/:id', function (req, res, next) {
 })
 });
 app.get('/test', (req, res) => res.send('Hello World!'))
-var server = app.listen(app.get('port'))
+//var server = app.listen(app.get('port'))
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
 
